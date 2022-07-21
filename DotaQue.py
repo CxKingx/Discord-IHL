@@ -9,7 +9,7 @@ class QueSystem:
         self.TimeoutTime = 30
         self.PreviousQue = []
         self.messageObject = 0
-        self.QueLimit = 4
+        self.QueLimit = 10
         self.ChannelID = 997895036509364274
 
         # 981448589115023420 ATDL
@@ -108,5 +108,5 @@ class QueSystem:
         self.CurrentQue = []
         self.TimeoutTime = 30
         self.PreviousQue = []
-        self.messageObject = 0
-        self.QueLimit = 4
+        #self.messageObject = 0
+        self.QueLimit = 10

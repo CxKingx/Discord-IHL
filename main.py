@@ -29,6 +29,12 @@ async def test(ctx):
     intersection = set(list1).intersection(list2)
     print(list(intersection))
 
+@bot.command(name='delmsg' , hidden=True)
+async def delmsg(ctx, messageID):
+    await ctx.message.delete()
+    original = await ctx.channel.fetch_message(messageID)
+    # newmsg = message.channel.fetch_message(split_message[1])
+    await original.delete()
 
 @bot.command(name='endQ', help='End a Dota Que')
 @commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
@@ -40,13 +46,37 @@ async def endQ(ctx):
     else:
         await ctx.send('no que to end')
 
+@bot.command(name='endQH', help='End a Dota Que')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+async def endQH(ctx):
+    if highQue.QueExist:
+        channel = bot.get_channel(newQue.ChannelID)
+        await highQue.messageObject.delete()
+        highQue.ResetQue()
+    else:
+        await ctx.send('no que to end')
+
+@bot.command(name='endQL', help='End a Dota Que')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+async def endQL(ctx):
+    if lowQue.QueExist:
+        channel = bot.get_channel(newQue.ChannelID)
+        await lowQue.messageObject.delete()
+        lowQue.ResetQue()
+    else:
+        await ctx.send('no que to end')
+
 
 @bot.command(name='startQ', help='Start a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin' , 'Inhouse Manager','Verified')
 async def startQ(ctx):
-    newQue.SetChannelID(997895036509364274)
+    newQue.SetChannelID(999592344556929125)
+    newQue.ResetQue()
     # drazz ev = 979725539243880498
     # test ev = 997895036509364274
+    # thread ev = 999545012918419526
+    # AU All = 999547326211305542
+    # AU 2 ALL = 999592344556929125
 
     # guild = bot.get_guild(846380741209620480) #846380741209620483 gen 979033486340010015 bot
     channel = bot.get_channel(newQue.ChannelID)
@@ -60,11 +90,14 @@ async def startQ(ctx):
 
 
 @bot.command(name='startQH', help='Start a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
 async def startQHigh(ctx):
-    highQue.SetChannelID(998140272007454740)
+    highQue.SetChannelID(999592351255253052)
+    highQue.ResetQue()
     #drazz High = 998586010143293470
     # test high = 998140272007454740
+    # AU High = 999547705590300692
+    # AU2 High = 999592351255253052
 
     # guild = bot.get_guild(846380741209620480) #846380741209620483 gen 979033486340010015 bot
     channel = bot.get_channel(highQue.ChannelID)
@@ -79,11 +112,15 @@ async def startQHigh(ctx):
 
 
 @bot.command(name='startQL', help='Start a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
 async def startQLow(ctx):
-    lowQue.SetChannelID(998140316601307216)
+    lowQue.SetChannelID(999592483942060043)
+    lowQue.ResetQue()
     # drazz low = 998586036106043444
     # test low = 998140316601307216
+    # AU Low = 999547464325546024
+    # AU2 Low = 999592483942060043
+
     channel = bot.get_channel(lowQue.ChannelID)
 
     embedVar = lowQue.StartQue()
@@ -156,7 +193,7 @@ async def on_raw_reaction_add(payload):
                 newQue.AddUser(payload.user_id)
                 if (newQue.CheckPop()):
                     await newQue.messageObject.delete()
-                    await channel.send('Que has popped ,participants are')
+                    await channel.send('Queue has popped ,participants are')
                     await channel.send(newQue.PopQue())
 
                     #Check High and Low and remove ppl from there
@@ -183,12 +220,12 @@ async def on_raw_reaction_add(payload):
 
                     #reset Que
                     newQue.ResetQue()
-                    embedVar = newQue.StartQue()
-                    messageObject = await channel.send(embed=embedVar)
-                    emoji = '<:watamepog:781536094591123546>'
-                    await messageObject.add_reaction(emoji)
-                    print('Que message id is ' + str(messageObject.id))
-                    newQue.RegisterMessage(messageObject)
+                    # embedVar = newQue.StartQue()
+                    # messageObject = await channel.send(embed=embedVar)
+                    # emoji = '<:watamepog:781536094591123546>'
+                    # await messageObject.add_reaction(emoji)
+                    # print('Que message id is ' + str(messageObject.id))
+                    # newQue.RegisterMessage(messageObject)
                 else:
                     embedVar = newQue.EditQueMessage()
                     await newQue.messageObject.edit(embed=embedVar)
@@ -200,7 +237,7 @@ async def on_raw_reaction_add(payload):
                 highQue.AddUser(payload.user_id)
                 if (highQue.CheckPop()):
                     await highQue.messageObject.delete()
-                    await channelHigh.send('Que has popped ,participants are')
+                    await channelHigh.send('Queue has popped ,participants are')
                     await channelHigh.send(highQue.PopQue())
                     # Check Everyone and Low and remove ppl from there
                     PoppedQue = highQue.CurrentQue
@@ -225,12 +262,12 @@ async def on_raw_reaction_add(payload):
                         await lowQue.messageObject.edit(embed=embedVar)
                     # reset Que
                     highQue.ResetQue()
-                    embedVar = highQue.StartQue()
-                    messageObject = await channelHigh.send(embed=embedVar)
-                    emoji = '<:watamepog:781536094591123546>'
-                    await messageObject.add_reaction(emoji)
-                    print('Que message id is ' + str(messageObject.id))
-                    highQue.RegisterMessage(messageObject)
+                    # embedVar = highQue.StartQue()
+                    # messageObject = await channelHigh.send(embed=embedVar)
+                    # emoji = '<:watamepog:781536094591123546>'
+                    # await messageObject.add_reaction(emoji)
+                    # print('Que message id is ' + str(messageObject.id))
+                    # highQue.RegisterMessage(messageObject)
                 else:
                     embedVar = highQue.EditQueMessage()
                     await highQue.messageObject.edit(embed=embedVar)
@@ -242,7 +279,7 @@ async def on_raw_reaction_add(payload):
                 lowQue.AddUser(payload.user_id)
                 if (lowQue.CheckPop()):
                     await lowQue.messageObject.delete()
-                    await channelLow.send('Que has popped ,participants are')
+                    await channelLow.send('Queue has popped ,participants are')
                     await channelLow.send(lowQue.PopQue())
                     # Check High and Everyone and remove ppl from there
                     PoppedQue = lowQue.CurrentQue
@@ -265,12 +302,12 @@ async def on_raw_reaction_add(payload):
                         await highQue.messageObject.edit(embed=embedVar)
                     # reset Que
                     lowQue.ResetQue()
-                    embedVar = lowQue.StartQue()
-                    messageObject = await channelLow.send(embed=embedVar)
-                    emoji = '<:watamepog:781536094591123546>'
-                    await messageObject.add_reaction(emoji)
-                    print('Que message id is ' + str(messageObject.id))
-                    lowQue.RegisterMessage(messageObject)
+                    # embedVar = lowQue.StartQue()
+                    # messageObject = await channelLow.send(embed=embedVar)
+                    # emoji = '<:watamepog:781536094591123546>'
+                    # await messageObject.add_reaction(emoji)
+                    # print('Que message id is ' + str(messageObject.id))
+                    # lowQue.RegisterMessage(messageObject)
                 else:
                     embedVar = lowQue.EditQueMessage()
                     await lowQue.messageObject.edit(embed=embedVar)
