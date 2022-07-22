@@ -37,7 +37,7 @@ async def delmsg(ctx, messageID):
     await original.delete()
 
 @bot.command(name='endQ', help='End a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
 async def endQ(ctx):
     if newQue.QueExist:
         channel = bot.get_channel(newQue.ChannelID)
@@ -47,7 +47,7 @@ async def endQ(ctx):
         await ctx.send('no que to end')
 
 @bot.command(name='endQH', help='End a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
 async def endQH(ctx):
     if highQue.QueExist:
         channel = bot.get_channel(newQue.ChannelID)
@@ -57,7 +57,7 @@ async def endQH(ctx):
         await ctx.send('no que to end')
 
 @bot.command(name='endQL', help='End a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
 async def endQL(ctx):
     if lowQue.QueExist:
         channel = bot.get_channel(newQue.ChannelID)
