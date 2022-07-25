@@ -349,7 +349,7 @@ async def on_message(message):
     channel = str(message.channel.name)
     channelID = str(message.channel.id)
     # channel_nsfw = message.channel.is_nsfw()
-    print(f'{username}: {user_message} ({channel})')
+    #print(f'{username}: {user_message} ({channel})')
     # if message.author == bot.user:
     # return
     if message.author == bot.user:
