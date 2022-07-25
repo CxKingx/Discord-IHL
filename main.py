@@ -349,14 +349,17 @@ async def on_message(message):
     channel = str(message.channel.name)
     channelID = str(message.channel.id)
     # channel_nsfw = message.channel.is_nsfw()
-    print(f'{username}: {user_message} ({channel}) (ID: {channelID})')
+    print(f'{username}: {user_message} ({channel})')
     # if message.author == bot.user:
     # return
     if message.author == bot.user:
         return
 
-    if user_message.lower() == 'emote':
-        await message.channel.send('<:watamepog:781536094591123546>')
+
+    # AU 968109880428888094
+    if str(message.guild.id) == '968109880428888094':
+        logchannel = bot.get_channel(1001138845603086366)
+        await logchannel.send(f'{username}: {user_message} ({channel})')
 
     await bot.process_commands(message)
 
