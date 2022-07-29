@@ -29,6 +29,7 @@ async def test(ctx):
     intersection = set(list1).intersection(list2)
     print(list(intersection))
 
+
 @bot.command(name='delmsg' , hidden=True)
 async def delmsg(ctx, messageID):
     await ctx.message.delete()
@@ -36,8 +37,9 @@ async def delmsg(ctx, messageID):
     # newmsg = message.channel.fetch_message(split_message[1])
     await original.delete()
 
+
 @bot.command(name='endQ', help='End a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def endQ(ctx):
     if newQue.QueExist:
         channel = bot.get_channel(newQue.ChannelID)
@@ -46,8 +48,9 @@ async def endQ(ctx):
     else:
         await ctx.send('no que to end')
 
+
 @bot.command(name='endQH', help='End a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def endQH(ctx):
     if highQue.QueExist:
         channel = bot.get_channel(newQue.ChannelID)
@@ -56,8 +59,9 @@ async def endQH(ctx):
     else:
         await ctx.send('no que to end')
 
+
 @bot.command(name='endQL', help='End a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def endQL(ctx):
     if lowQue.QueExist:
         channel = bot.get_channel(newQue.ChannelID)
@@ -68,9 +72,9 @@ async def endQL(ctx):
 
 
 @bot.command(name='startQ', help='Start a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin' , 'Inhouse Manager','Verified')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def startQ(ctx):
-    newQue.SetChannelID(999592344556929125)
+    newQue.SetChannelID(1002156714365296701)
     newQue.ResetQue()
     # drazz ev = 979725539243880498
     # test ev = 997895036509364274
@@ -90,7 +94,7 @@ async def startQ(ctx):
 
 
 @bot.command(name='startQH', help='Start a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def startQHigh(ctx):
     highQue.SetChannelID(999592351255253052)
     highQue.ResetQue()
@@ -112,7 +116,7 @@ async def startQHigh(ctx):
 
 
 @bot.command(name='startQL', help='Start a Dota Que')
-@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin', 'Inhouse Manager','Verified')
+@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def startQLow(ctx):
     lowQue.SetChannelID(999592483942060043)
     lowQue.ResetQue()
@@ -355,13 +359,6 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-
-    # AU 968109880428888094
-    if str(message.guild.id) == '968109880428888094':
-        logchannel = bot.get_channel(1001138845603086366)
-        await logchannel.send(f'{username}: {user_message} ({channel})')
-
-    await bot.process_commands(message)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

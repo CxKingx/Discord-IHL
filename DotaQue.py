@@ -10,10 +10,11 @@ class QueSystem:
         self.PreviousQue = []
         self.messageObject = 0
         self.QueLimit = 10
-        self.ChannelID = 997895036509364274
+        self.ChannelID = 1002156714365296701
 
         # 981448589115023420 ATDL
         # 979725539243880498 #Draz
+	# Goblin 1002156714365296701
 
     def SetChannelID(self, newID):
         self.ChannelID = newID
