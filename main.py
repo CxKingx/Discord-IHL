@@ -359,7 +359,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-
+    await bot.process_commands(message)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 bot.run(my_secret)
