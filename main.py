@@ -227,12 +227,12 @@ async def on_raw_reaction_add(payload):
 
                     #reset Que
                     newQue.ResetQue()
-                    # embedVar = newQue.StartQue()
-                    # messageObject = await channel.send(embed=embedVar)
-                    # emoji = '<:watamepog:781536094591123546>'
-                    # await messageObject.add_reaction(emoji)
-                    # print('Que message id is ' + str(messageObject.id))
-                    # newQue.RegisterMessage(messageObject)
+                    embedVar = newQue.StartQue()
+                    messageObject = await channel.send(embed=embedVar)
+                    emoji = '<:watamepog:781536094591123546>'
+                    await messageObject.add_reaction(emoji)
+                    print('Que message id is ' + str(messageObject.id))
+                    newQue.RegisterMessage(messageObject)
                 else:
                     embedVar = newQue.EditQueMessage()
                     await newQue.messageObject.edit(embed=embedVar)
