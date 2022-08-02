@@ -137,10 +137,13 @@ async def startQLow(ctx):
 
 
 @bot.command(name='pingQ', help='Ping the Queres')
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def pingQ(ctx):
+    print(newQue.QueLimit)
+    print(len(newQue.CurrentQue))
     remaining_Slot = newQue.QueLimit - len(newQue.CurrentQue)
     await ctx.send(
-        '<@&997892212882931872> +' + str(remaining_Slot) + ' go to <#' + str(newQue.ChannelID) + '> to join the que')
+        ' <@&1002124426696994857> & <@&1002121547609280562> +' + str(remaining_Slot) + ' go to <#' + str(newQue.ChannelID) + '> to join the que')
 
 
 @bot.command(name='getQ', help='Get Current Que')
