@@ -1,2 +1,8 @@
 # Discord-IHL
-Discord Bot for AU/SEA Discord Server to manage players
+Discord Bot for managing Inhouse Players
+
+A piece of the original Discord Bot Code 
+
+Inspired by Seal Bot 
+
+More Features Coming Soon
