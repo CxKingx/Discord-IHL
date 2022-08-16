@@ -11,10 +11,8 @@ class QueSystem:
         self.messageObject = 0
         self.QueLimit = 10
         self.ChannelID = 1002156714365296701
-
-        # 981448589115023420 ATDL
-        # 979725539243880498 #Draz
-	# Goblin 1002156714365296701
+        self.ParticipantDict = []
+        # Goblin 1002156714365296701
 
     def SetChannelID(self, newID):
         self.ChannelID = newID
@@ -30,7 +28,8 @@ class QueSystem:
         return
 
     def CheckUserInQue(self, UserID):
-        if any(str(x) == str(UserID) for x in self.CurrentQue):
+        if any(str(x[0]) == str(UserID) for x in self.ParticipantDict):
+        #if any(str(x) == str(UserID) for x in self.CurrentQue):
             print('have same so no add')
             return True
         else:
@@ -39,56 +38,59 @@ class QueSystem:
             # self.AddUser(UserID)
 
     def CheckPop(self):
-        if len(self.CurrentQue) >= self.QueLimit:
+        if len(self.ParticipantDict) >= self.QueLimit:
             return True
         else:
             return False
 
-    def AddUser(self, UserID):
-        self.CurrentQue.append(str(UserID))
-        # print('cur que is ')
-        # print(self.CurrentQue)
 
-    #Remove by mentioning
-    def RemoveUser(self, User):
-        print('removed from que ' + str(User.id))
-        self.CurrentQue.remove(str(User.id))
-
-        # print('cur que is ')
-        # print(self.CurrentQue)
+    def AddData(self, UserData):
+        print('Added Tuple')
+        self.ParticipantDict.append(UserData)
         return
 
-    def RemoveUserInt(self, UserID):
-        print('removed from que ' + str(UserID))
-        self.CurrentQue.remove(str(UserID))
-
-        # print('cur que is ')
-        # print(self.CurrentQue)
+    def RemoveData(self, User):
+        print('removed from Tuple que ' + str(User))
+        self.ParticipantDict.remove(User)
         return
+
+    def GetUser(self,User):
+        print('Get User')
+        for x in self.ParticipantDict:
+            if str(x[0]) == str(User.id):
+                #print('found to remove')
+                return x
+
+
 
     def GetCurrentQue(self):
-        embedVar = discord.Embed(title="Current Q: " + str(len(self.CurrentQue)) + '/' + str(self.QueLimit),
+        embedVar = discord.Embed(title="Current Q: " + str(len(self.ParticipantDict)) + '/' + str(self.QueLimit),
                                  description='<#'+str(self.ChannelID)+'> to join Que', color=0x00ff00)
+        #print(self.ParticipantDict)
+        #for x in self.ParticipantDict:
+            #print('x0 is '+str(x[0])+' x1 is '+str(x[1]))
+            #print('Types  x0 is ' + type(x[0]) + ' x1 is ' + type(x[1]))
         quelist = ''
-        if len(self.CurrentQue):
-            for x in self.CurrentQue:
+        if len(self.ParticipantDict):
+            for x in self.ParticipantDict:
                 # print(x)
-                quelist = quelist + ' <@!' + x + '> \n'
+                quelist = quelist + ' <@!' + str(x[0]) + '> \n'
             print(quelist)
             embedVar.add_field(name='\u200b', value=quelist, inline=False)
         else:
             embedVar.add_field(name='\u200b', value='\u200b', inline=False)
         return embedVar
 
+
     def EditQueMessage(self):
 
-        embedVar = discord.Embed(title="Current Q: " + str(len(self.CurrentQue)) + '/' + str(self.QueLimit),
+        embedVar = discord.Embed(title="Current Q: " + str(len(self.ParticipantDict)) + '/' + str(self.QueLimit),
                                  description='Press the reaction to join ', color=0x00ff00)
         quelist = ''
-        if len(self.CurrentQue):
-            for x in self.CurrentQue:
+        if len(self.ParticipantDict):
+            for x in self.ParticipantDict:
                 # print(x)
-                quelist = quelist + ' <@!' + x + '> \n'
+                quelist = quelist + ' <@!' + str(x[0]) + '> \n'
             print(quelist)
             embedVar.add_field(name='\u200b', value=quelist, inline=False)
         else:
@@ -96,12 +98,11 @@ class QueSystem:
         return embedVar
 
     def PopQue(self):
-        # Put currentQue to Past Que
         # send message
         PopMsg = ''
-        for x in self.CurrentQue:
+        for x in self.ParticipantDict:
             # print(x)
-            PopMsg = PopMsg + ' <@!' + x + '> \n'
+            PopMsg = PopMsg + ' <@!' + str(x[0]) + '> \n'
         return PopMsg
 
     def ResetQue(self):
@@ -111,3 +112,4 @@ class QueSystem:
         self.PreviousQue = []
         #self.messageObject = 0
         self.QueLimit = 10
+        self.ParticipantDict = []
