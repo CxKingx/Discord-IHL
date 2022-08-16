@@ -113,10 +113,11 @@ async def endQ(ctx):
 @bot.command(name='startQ', help='Start a Dota Que')
 #@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def startQ(ctx):
-    newQue.SetChannelID(979725539243880498)
+    newQue.SetChannelID(1002156714365296701)
     newQue.ResetQue()
     # drazz ev = 979725539243880498
     # test ev = 997895036509364274
+    # goblin = 1002156714365296701
     #Kuul Tesat = 847409872324657153
 
     # guild = bot.get_guild(846380741209620480) #846380741209620483 gen 979033486340010015 bot
