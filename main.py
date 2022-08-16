@@ -2,8 +2,8 @@ import os
 import discord
 #import datetime,timedelta
 from datetime import datetime,timedelta
-import pytz
-import time
+#import pytz
+#import time
 from discord.ext import commands, tasks
 from DotaQue import QueSystem
 
