@@ -182,7 +182,7 @@ async def on_raw_reaction_add(payload):
     #print(payload.message_id)
     channel = bot.get_channel(newQue.ChannelID)
     today = datetime.today()  # 22:20
-    MaxTimeRemove = today + timedelta(minutes=15)  # 22:45
+    MaxTimeRemove = today + timedelta(minutes=30)  # 22:45
     guild = bot.get_guild(payload.guild_id)
 
     if payload.member.id != bot.user.id:
