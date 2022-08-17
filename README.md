@@ -1,8 +1,11 @@
 # Discord-IHL
-Discord Bot for managing Inhouse Players
+Discord Bot for managing Inhouse Players 
 
-A piece of the original Discord Bot Code 
+Inspired by Seal Bot https://discord.com/invite/KuReSaC 
 
-Inspired by Seal Bot 
+*startQ to start a Queue
+it will add users into the Queue list if the user reacts on the emoji
+Removes users automatically after 15minutes if the Queue hasn't popped
+
 
 More Features Coming Soon
