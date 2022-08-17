@@ -139,7 +139,7 @@ async def pingQ(ctx):
     print(len(newQue.ParticipantDict))
     remaining_Slot = newQue.QueLimit - len(newQue.ParticipantDict)
     await ctx.send(
-        ' <@&1002124426696994857> & <@&1002121547609280562> +' + str(remaining_Slot) + ' go to <#' + str(newQue.ChannelID) + '> to join the que')
+        ' <@&1002124426696994857> +' + str(remaining_Slot) + ' go to <#' + str(newQue.ChannelID) + '> to join the que')
 
 
 @bot.command(name='getQ', help='Get Current Que')
