@@ -4,6 +4,7 @@ import discord
 from datetime import datetime,timedelta
 #import pytz
 #import time
+from discord import reaction
 from discord.ext import commands, tasks
 from DotaQue import QueSystem
 
@@ -27,6 +28,7 @@ async def test(ctx):
     intersection = set(list1).intersection(list2)
     print(list(intersection))
 
+
 @tasks.loop(minutes =1)
 async def CheckQPeriodically():
     #print('doin smth')
@@ -47,10 +49,13 @@ async def CheckQPeriodically():
             embedVar = newQue.EditQueMessage()
             await newQue.messageObject.edit(embed=embedVar)
 
+
             if bot.get_user(int(x[0])) is not None:
                 #print('success send')
                 member = bot.get_user(int(x[0]))
                 #member = guild.get_member(str(x[0]))
+                #await remove_reaction()
+                await newQue.messageObject.remove_reaction('<:watamepog:781536094591123546>',member)
                 try:
                     await member.send('You have been removed automatically for timerug prevention, requeue if you still want to join')
                 except:
@@ -113,7 +118,7 @@ async def endQ(ctx):
 @bot.command(name='startQ', help='Start a Dota Que')
 #@commands.has_any_role("MOD", 'mod', 'Moderators', 'Admin','Goblin king','Goblin giants')
 async def startQ(ctx):
-    newQue.SetChannelID(1002156714365296701)
+    newQue.SetChannelID(979725539243880498)
     newQue.ResetQue()
     # drazz ev = 979725539243880498
     # test ev = 997895036509364274
@@ -182,7 +187,7 @@ async def on_raw_reaction_add(payload):
     #print(payload.message_id)
     channel = bot.get_channel(newQue.ChannelID)
     today = datetime.today()  # 22:20
-    MaxTimeRemove = today + timedelta(minutes=30)  # 22:45
+    MaxTimeRemove = today + timedelta(minutes=1)  # 22:45
     guild = bot.get_guild(payload.guild_id)
 
     if payload.member.id != bot.user.id:
